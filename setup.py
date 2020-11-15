@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     name="nought", # Replace with your own username
     version="0.0.1",
-		# scripts=['./run.sh'],
+		scripts=['./run.sh'],
     author="Cole Wilson",
     author_email="cole@colewilson.xyz",
     description="A small example package",
@@ -14,6 +14,12 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/cole-wilson/nought",
     packages=setuptools.find_packages(),
+		install_requires=[
+   		'toml',
+		],
+		entry_points={
+    	'console_scripts': ['nought = nought:main'],
+		},
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
