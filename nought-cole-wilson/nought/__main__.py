@@ -49,10 +49,8 @@ def move(rule):
 def ev(match):
 	t = match.group()
 	return str(next(iter((eval(t.replace('$name','"'+f+'"'))))))
-
 with open('nought.toml','r') as f:
 	config = toml.loads(f.read())
-
 for location in config["location"]:
 	os.chdir(config["general"]["base_dir"])
 	path = location["path"]
@@ -63,7 +61,6 @@ for location in config["location"]:
 		p("That didn't work! That folder doesn't exist.")
 		continue
 	tab += 1
-
 	filedirs = []
 	# get files and folders
 	if "recursive" in location and location["recursive"]:
@@ -73,7 +70,6 @@ for location in config["location"]:
 					filedirs.append(root.replace('./','')+os.sep+file.replace('./',''))
 			for dir in dirs:
 					filedirs.append(root.replace('./','')+os.sep+dir.replace('./',''))
-
 	else:
 		filedirs = os.listdir(".")
 	files = []
@@ -83,14 +79,10 @@ for location in config["location"]:
 			files.append(x.replace('./',''))
 		elif os.path.isdir(x):
 			dirs.append(x.replace('./',''))
-
 	if ("include_dirs" in location and location["include_dirs"]):
 		files = filedirs
 	if ("only_dirs" in location and location["only_dirs"]):
 		files = dirs
-
-
-
 	# rules
 	filesmatched = []
 	for f in files:		
@@ -112,7 +104,6 @@ for location in config["location"]:
 			continue
 		if "include_dirs" in location and location["include_dirs"] and len(f.split(os.sep))>1:
 			continue
-
 		# f = f.replace(' ','_')
 		# f = f.replace('(','_')
 		# f = f.replace(')','_')
@@ -129,11 +120,9 @@ for location in config["location"]:
 			a = 0
 			am = 0
 			matches = "matches: "
-
 			for x in ["includes","regex","size_less_than","size_more_than","content_includes","custom","modified_before","modified_after","user","group"]:
 				if x in rule:
 					a += 1
-
 			if "includes" in rule:
 				for include in e(rule["includes"]):
 					if include in f:
@@ -171,35 +160,29 @@ for location in config["location"]:
 				if os.popen('getent passwd '+str(os.stat(f).st_gid)+' | cut -d: -f1').read().replace('\n','') == e(rule["group"]):
 					matches += " owned_by_group `"+str(rule["group"])+"`"
 					am += 1
-			
 			if "content_includes" in rule:
 				if e(rule["content_includes"]) in open(f).read():
 					matches += " content_includes:`"+str(rule["content_includes"])+"`"
 					am += 1
-			
 			if am == a:
 				match = True
 				nomatch = False
 				p(matches)
-
 			if match:
 				# DELETE
 				filesmatched.append(f)
 				if e(rule["action"]) == "delete":
 					p("deleting item")
 					os.remove(f)
-
 				# MOVE
 				elif e(rule["action"]) == "move":
 					move(rule)
-
 				# SCRIPT
 				elif "script" in rule:
 					try:
 						os.system(shellquote(rule["script"].replace('$name',newlocation)))
 					except:
 						pass
-
 				# LINK
 				if "link_in" in rule:
 					if "regex" in rule:
@@ -209,7 +192,6 @@ for location in config["location"]:
 					p(f'linking to file from {linkloc}')
 					ensure(linkloc)
 					os.system(f'ln -s {newlocation} {linkloc}')
-
 			tab -= 1
 		if nomatch:
 			tab += 1
