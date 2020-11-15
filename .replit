@@ -1,0 +1,2 @@
+language="python3"
+run="rm -rf Desktop;cp -r f Desktop;python3 main.py;"

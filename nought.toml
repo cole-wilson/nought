@@ -1,0 +1,19 @@
+[general]
+os = "linux"
+user = "runner"
+backup = true
+base_dir = "/home/runner/nought/" # Use Ending Slash Please 
+verbose = true
+debug = false
+
+#options = ["includes","regex","size_less_than","size_more_than","content_includes"]
+
+[[location]]
+path = "./Desktop"
+recursive = true
+include_dirs = true
+
+	[[location.rule]]
+	modified_after = 1605421162
+	action = "move"
+	move_to = "bob"
