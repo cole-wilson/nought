@@ -1,2 +1,2 @@
 language="python3"
-run="python3 setup.py develop"
+run="python3 setup.py sdist bdist_wheel"
