@@ -5,8 +5,11 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="nought", # Replace with your own username
-    version="0.0.2",
+    version="0.0.3",
 		scripts=['bin/nought'],
+		entry_points={
+        'console_scripts': ['nought=nought:main'],
+    },
     author="Cole Wilson",
     author_email="cole@colewilson.xyz",
     description="A super customizable file cleaner/organizer/automator",
