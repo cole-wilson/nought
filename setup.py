@@ -5,10 +5,10 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="nought", # Replace with your own username
-    version="0.0.3",
-		scripts=['bin/nought'],
+    version="0.0.4",
+		# scripts=['bin/nought'],
 		entry_points={
-        'console_scripts': ['nought=nought:main'],
+        'console_scripts': ['nought=nought.console:main'],
     },
     author="Cole Wilson",
     author_email="cole@colewilson.xyz",
