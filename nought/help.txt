@@ -1,0 +1,21 @@
+usage: nought [options] [identifiers ...]
+    Display information about builtin commands.
+    
+    Displays brief summaries of builtin commands.  If PATTERN is
+    specified, gives detailed help on all commands matching PATTERN,
+    otherwise the list of help topics is printed.
+    
+    Options:
+			-c [location], --config [location]  	specify configuration file. Default: "./nought.toml" 
+						(see -d and "Environment Variables")
+			-b [location], --backup [location]		backup files to specified location. Default: false
+			-d, --default		set the config file as default
+			-a, --about			display version and exit
+			-h, --help			display this help message
+			-t, --test			test configuration without actually doing anything (enables verbose mode)
+    
+    Arguments:
+			IDENTIFIERS:		a repeatable identifier for which groups to run
+    
+		Environment Variables:
+			NOUGHT_CONFIG:  the path to the default configuration file
