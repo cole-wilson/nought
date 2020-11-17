@@ -1,7 +1,28 @@
 import os, sys, getopt
-
+hel = """
+usage: nought [options] [identifiers ...]
+    Runs `nought`, the super customizable file cleaner/organizer/automator
+    
+    Options:
+			-c [location], --config [location]  	specify configuration file. Default: "./nought.toml" (see -d and "Environment Variables")
+			-b [location], --backup [location]		backup files to specified location. Default: false
+			-d, --default		set the config file as default
+			-a, --about			display version and exit
+			-h, --help			display this help message
+			-t, --test			test configuration without actually doing anything (enables verbose mode)
+    
+    Arguments:
+			IDENTIFIERS:		a repeatable identifier for which groups to run
+    
+    Environment Variables:
+			NOUGHT_CONFIG:  the path to the default configuration file
+"""
 def help():
-	helptext = open(os.path.dirname(os.path.abspath(__file__))+os.sep+"help.txt").read()
+	global hel
+	try:
+		helptext = open(os.path.dirname(os.path.abspath(__file__))+os.sep+"help.txt").read()
+	except:
+		helptext = hel
 	print(helptext)
 
 def main():
@@ -62,6 +83,8 @@ def main():
 		options['config'] = os.environ["NOUGHT_CONFIG"]
 	elif os.path.isfile(os.path.abspath(__file__).replace(__file__,"")+"conf.toml"):
 		options['config'] = os.path.abspath(__file__).replace(__file__,"")+"conf.toml"
+	elif os.name == 'nt':
+		print('You are using Windows, so you have to manually set a config location with -c or --config')
 	# print(os.abspath(__file__))
 	elif os.path.isfile('nought.toml'):
 		options['config'] = 'nought.toml'
