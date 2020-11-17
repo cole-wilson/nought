@@ -2,7 +2,7 @@ usage: nought [options] [identifiers ...]
     Runs `nought`, the super customizable file cleaner/organizer/automator
     
     Options:
-			-w, --wizard		display the setup wizard
+			-w, -s, --wizard, --witch, --squib		display the setup witch/wizard/squib
 			-c [location], --config [location]  	specify configuration file. Default: "./nought.toml" (see -d and "Environment Variables")
 			-b [location], --backup [location]		backup files to specified location. Default: false
 			-d, --default		set the config file as default

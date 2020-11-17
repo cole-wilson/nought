@@ -7,13 +7,13 @@ It lets you have complete control over all of it's options (there are many)
 User only install: `sudo pip install nought --user`
 System wide install: `sudo pip3 install nought`
 ## Usage
-To start, the best way is to tun `nought -w`
+To start, the best way is to run the setup wizard (`nought -w`)
 ```text
 usage: nought [options] [identifiers ...]
     Runs `nought`, the super customizable file cleaner/organizer/automator
     
     Options:
-			-w, --wizard		display the setup wizard
+			-w, -s, --wizard, --witch, --squib		display the setup witch/wizard/squib
 			-c [location], --config [location]  	specify configuration file. Default: "./nought.toml" (see -d and "Environment Variables")
 			-b [location], --backup [location]		backup files to specified location. Default: false
 			-d, --default		set the config file as default
@@ -27,7 +27,7 @@ usage: nought [options] [identifiers ...]
     Environment Variables:
 			NOUGHT_CONFIG:  the path to the default configuration file
 ```
-For example, to run the `r1` routine in config file `/etc/nought/conf.toml` after backing up all directoriesm you would run:
+For example, to run the `r1` routine in config file `/etc/nought/conf.toml` after backing up all directories you would run:
 `nought -bc /etc/nought/conf.toml r1`
 The default config file location is stored in the `NOUGHT_CONFIG` environment variable.
 ## Configuration
@@ -43,33 +43,33 @@ id = "test" # (optional, default="./") A string OR list of identifiers (used in 
 recursive = true # (optional, default="./") Whether or not edit files recursively.
 include_dirs = true # (optional, default="./") Whether to treat directories as files. WARNING: DIRECTORIES INCLUDE ALL FILES IN THEM!
 
-		[[group.rule]] # Repeatable per group, matches file
+	[[group.rule]] # Repeatable per group, matches file
 
-		# Below are all the conditions that can be used to match files. ALL conditions must be met to perform action:
-		# All values in curly braces are evaluated as python expressions, like this: "./home/{2*90}/test.txt" turns to "./home/180/test.txt"
-		includes = [".jpg",".png"] # A list of non regex strings to search for IN FILENAME
-		regex = '[Ss]creenshot(.*?)' # A regex string to match filename against. Capturing groups can be reused later. Use single quotes.
-		size_less_than = 12 # Number of bytes (use less than 0 for empty files)
-		size_more_than = 2 # Number of bytes
-		content_includes = "text" # A non regex string to search for in file CONTENT
-		custom = "len(open('$name').read().split()) > 2" # A python expression that returns True or False. `$name` is substituted with filename.
-		modified_before = 8736423423 # A Unix timestamp in seconds. Negative values are subtracted from current time.
-		modified_after = -1978263 # A Unix timestamp in seconds. Negative values are subtracted from current time.
-		user = "root" # Matches Unix user name
-		group = "www-data" # Matches Unix group name
-		
-		# `action` can be one of the following:
-		action = "move" # Moves or renames file
-		action = "delete" # Deletes file
-		action = "script" # Runs a script
-		
-		move_to = "folder" # moves into folder
-		move_to = "screenshots/$1/$name" # moves using regex backreferences and `$name` replacement.
+	# Below are all the conditions that can be used to match files. ALL conditions must be met to perform action:
+	# All values in curly braces are evaluated as python expressions, like this: "./home/{2*90}/test.txt" turns to "./home/180/test.txt"
+	includes = [".jpg",".png"] # A list of non regex strings to search for IN FILENAME
+	regex = '[Ss]creenshot(.*?)' # A regex string to match filename against. Capturing groups can be reused later. Use single quotes.
+	size_less_than = 12 # Number of bytes (use less than 0 for empty files)
+	size_more_than = 2 # Number of bytes
+	content_includes = "text" # A non regex string to search for in file CONTENT
+	custom = "len(open('$name').read().split()) > 2" # A python expression that returns True or False. `$name` is substituted with filename.
+	modified_before = 8736423423 # A Unix timestamp in seconds. Negative values are subtracted from current time.
+	modified_after = -1978263 # A Unix timestamp in seconds. Negative values are subtracted from current time.
+	user = "root" # Matches Unix user name
+	group = "www-data" # Matches Unix group name
+	
+	# `action` can be one of the following:
+	action = "move" # Moves or renames file
+	action = "delete" # Deletes file
+	action = "script" # Runs a script
+	
+	move_to = "folder" # moves into folder
+	move_to = "screenshots/$1/$name" # moves using regex backreferences and `$name` replacement.
 
-		script = "nano $name" # $name is replaced with file
+	script = "nano $name" # $name is replaced with file
 
-		# optional: symlink to new file in another directory:
-		link_in = ".//path/to/symlink/location/" 
+	# optional: symlink to new file in another directory:
+	link_in = ".//path/to/symlink/location/" 
 ```
 All values in curly braces are evaluated as python expressions, like this: `./home/{2*90}/test.txt` turns to `./home/180/test.txt`
 
