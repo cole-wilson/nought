@@ -1,7 +1,7 @@
 import os, sys, getopt
 
 def help():
-	helptext = open(os.path.dirname(os.path.abspath(__file__))+"/help.txt").read()
+	helptext = open(os.path.dirname(os.path.abspath(__file__))+os.sep+"help.txt").read()
 	print(helptext)
 
 def main():
@@ -64,7 +64,7 @@ def main():
 		options['config'] = os.path.abspath(__file__).replace(__file__,"")+"conf.toml"
 	# print(os.abspath(__file__))
 	elif os.path.isfile('nought.toml'):
-		options['config'] = './nought.toml'
+		options['config'] = 'nought.toml'
 	else:
 		print('nought: no config file found!\n')
 		help()

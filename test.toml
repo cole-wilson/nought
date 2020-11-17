@@ -1,14 +1,40 @@
 [general]
-base_dir = "/home/runner/dobby/"
+base_dir = "/home/runner/Desktop/"
 
 [[group]]
-path = "./files"
-recursive = false
+path = "."
+recursive = true
 
 	[[group.rule]]
-	regex = '[Ss]creenshot\s(\d{4})-(\d{2})-(\d{2})'
+	regex = '[Ss]creenshot.(\d{4}).(\d{2}).(\d{2})'
 	action = "move"
 	move_to = "$bp/screenshots/$1/_{['January','February','March','April','May','June','July','August','September','October','November','December'][int('$2')]}/$3/$name"
+
+	[[group.rule]]
+	regex = '[Uu]ntitled'
+	action = "move"
+	move_to = "$bp/untitled/name"
+
+	[[group.rule]]
+	includes = [".png",".jpg",".svg",".gif",".jpeg",".cur"]
+	action = "move"
+	move_to = "$bp/images"
+
+	[[group.rule]]
+	includes = [".mp4",".mp3"]
+	action = "move"
+	move_to = "$bp/media"
+
+	
+	[[group.rule]]
+	includes = [".pdf",".txt"]
+	action = "move"
+	move_to = "$bp/documents"
+
+	[[group.rule]]
+	includes = [".stl",".obj"]
+	action = "move"
+	move_to = "$bp/3d"
 
 	[group.other]
 	action = "move"

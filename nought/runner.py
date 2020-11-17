@@ -159,7 +159,7 @@ def main(options,ids):
 						if x in rule:
 							a += 1
 					if "includes" in rule:
-						for include in e(rule["includes"]):
+						for include in rule["includes"]:
 							if include in f:
 								am += 1
 								matches += " `"+include+"`"

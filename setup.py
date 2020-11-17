@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="nought", # Replace with your own username
-    version="1.0.0",
+    version="1.0.1",
 		# scripts=['bin/nought'],
 		entry_points={
         'console_scripts': ['nought=nought.__main__:main'],
