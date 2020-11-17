@@ -7,11 +7,13 @@ It lets you have complete control over all of it's options (there are many)
 User only install: `sudo pip install nought --user`
 System wide install: `sudo pip3 install nought`
 ## Usage
+To start, the best way is to tun `nought -w`
 ```text
 usage: nought [options] [identifiers ...]
     Runs `nought`, the super customizable file cleaner/organizer/automator
     
     Options:
+			-w, --wizard		display the setup wizard
 			-c [location], --config [location]  	specify configuration file. Default: "./nought.toml" (see -d and "Environment Variables")
 			-b [location], --backup [location]		backup files to specified location. Default: false
 			-d, --default		set the config file as default
