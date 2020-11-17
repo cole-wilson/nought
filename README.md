@@ -4,6 +4,8 @@ It lets you have complete control over all of it's options (there are many)
 ## Installation
 > **Note:** Please ensure that you have Python 3.6+ and `pip` installed on your computer before completing the following steps:
 
+THIS TOOL HAS NOT BEEN TESTED FOR WINDOWS. USE AT YOUR OWN RISK FOR WINDOWS...
+
 User only install: `sudo pip3 install nought --user`
 System wide install: `sudo pip3 install nought`
 ## Usage
@@ -75,6 +77,8 @@ $bp is replaced with the starting path or the rule.
 $bd is replaced with the base dir of the entire config file.
 ## Upcoming
 I will be adding NOT conditions soon.
+## Contribution
+Please submit a PR if you want to help! It would be especially helpful if someone tests for windows.
 ## Contact
 If you need any help with anything, even how to write your config file, contact:
 [`cole@colewilson.xyz`](mailto:cole@colewilson.xyz)
