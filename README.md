@@ -4,16 +4,14 @@ It lets you have complete control over all of it's options (there are many)
 ## Installation
 > **Note:** Please ensure that you have Python 3.6+ and `pip` installed on your computer before completing the following steps:
 
-User only install: `sudo pip install nought --user`
+User only install: `sudo pip3 install nought --user`
 System wide install: `sudo pip3 install nought`
 ## Usage
-To start, the best way is to run the setup wizard (`nought -w`)
 ```text
 usage: nought [options] [identifiers ...]
     Runs `nought`, the super customizable file cleaner/organizer/automator
     
     Options:
-			-w, -s, --wizard, --witch, --squib		display the setup witch/wizard/squib
 			-c [location], --config [location]  	specify configuration file. Default: "./nought.toml" (see -d and "Environment Variables")
 			-b [location], --backup [location]		backup files to specified location. Default: false
 			-d, --default		set the config file as default
@@ -46,7 +44,7 @@ include_dirs = true # (optional, default="./") Whether to treat directories as f
 	[[group.rule]] # Repeatable per group, matches file
 
 	# Below are all the conditions that can be used to match files. ALL conditions must be met to perform action:
-	# All values in curly braces are evaluated as python expressions, like this: "./home/{2*90}/test.txt" turns to "./home/180/test.txt"
+	# All values in underscore curly braces (_{code here}) are evaluated as python expressions, like this: "./home/${2*90}/test.txt" turns to "./home/180/test.txt"
 	includes = [".jpg",".png"] # A list of non regex strings to search for IN FILENAME
 	regex = '[Ss]creenshot(.*?)' # A regex string to match filename against. Capturing groups can be reused later. Use single quotes.
 	size_less_than = 12 # Number of bytes (use less than 0 for empty files)
@@ -68,11 +66,13 @@ include_dirs = true # (optional, default="./") Whether to treat directories as f
 
 	script = "nano $name" # $name is replaced with file
 
-	# optional: symlink to new file in another directory:
-	link_in = ".//path/to/symlink/location/" 
+	[group.other] # this matches all files that haven't been matched (single brackets)
+	action = "move"
+	move_to = "other"
 ```
-All values in curly braces are evaluated as python expressions, like this: `./home/{2*90}/test.txt` turns to `./home/180/test.txt`
-
+All values in underscore curly braces (_{code here}) are evaluated as python expressions, like this: `./home/${2*90}/test.txt` turns to `./home/180/test.txt`
+$bp is replaced with the starting path or the rule.
+$bd is replaced with the base dir of the entire config file.
 ## Upcoming
 I will be adding NOT conditions soon.
 ## Contact

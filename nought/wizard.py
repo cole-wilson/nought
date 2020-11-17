@@ -1,4 +1,4 @@
 import sys
 def main():
-	print('Hello, this tool isn\'t ready yet. Please ignore!')
+	# print('Hello, this will help you schedule !')
 	sys.exit(0)

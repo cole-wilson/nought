@@ -15,6 +15,8 @@ def main():
 		sys.exit(0)
 	if len(ids) == 0:
 		ids = ["default"]
+	options["verbose"] = False
+	options["test"] = False
 	for key,value in arguments:
 		if key in ("--easteregg"):
 			print("Don't be silly, there aren't any easter eggs hidden in the program... i think...")

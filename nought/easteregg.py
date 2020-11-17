@@ -97,5 +97,5 @@
 
 
 def egg():
-	egg = "i told you there wern't any easter eggs!"
+	egg = "i told you there weren't any easter eggs!"
 	print(egg)

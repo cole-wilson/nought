@@ -33,4 +33,4 @@ include_dirs = true # (optional, default="./") Whether to treat directories as f
 		script = "nano $name" # $name is replaced with file
 
 		# optional: symlink to new file in another directory:
-		link_in = ".//path/to/symlink/location/" 
+		link_in = "./path/to/symlink/location/" 

@@ -1,0 +1,15 @@
+[general]
+base_dir = "/home/runner/dobby/"
+
+[[group]]
+path = "./files"
+recursive = false
+
+	[[group.rule]]
+	regex = '[Ss]creenshot\s(\d{4})-(\d{2})-(\d{2})'
+	action = "move"
+	move_to = "$bp/screenshots/$1/_{['January','February','March','April','May','June','July','August','September','October','November','December'][int('$2')]}/$3/$name"
+
+	[group.other]
+	action = "move"
+	move_to = "$bp/other"

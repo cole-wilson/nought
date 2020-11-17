@@ -9,11 +9,11 @@ import os, toml, re, datetime, time, requests, sys, getopt
 
 verb = False
 tab = 0
-
+f = ""
 def shellquote(s):
 	return s.replace('(',r"\(").replace(')',r"\)")#.replace(' ',r"\ ")
 def e(string):
-	return re.sub("\{.*?\}",ev,str(string))
+	return re.sub("_\{.*?\}",ev,str(string))
 def p(string):
 	global verb
 	global tab
@@ -29,31 +29,43 @@ def ensure(path):
 	if not os.path.isdir(d) and d!="":
 		os.system('mkdir -p ' + d)
 	# print(d)
-def move(rule,f):
+def move(rule,options):
+	global f
 	if not "regex" in rule:#NORMAL MOVE
-		newgroup = e(rule["move_to"])+os.sep+f
+		newgroup = e(rule["move_to"].replace('$bp',basepath))+os.sep+f
 		ensure(newgroup)
-		p("moving file to `"+newgroup+"`")
-		os.rename(f,newgroup)
+		if not options['test']:
+			p("moving file to `"+newgroup+"`")
+			os.rename(f,newgroup)
 
 	else:#REGEX MOVE
-		try:
-			newgroup = re.sub(rule["regex"],e(rule['move_to']).replace('$name',f).replace('$','\\'),f)
-			p("moving file to `"+newgroup+"`")
+		# try:
+		newgroup = e(re.sub(".*?"+rule["regex"]+".*",rule['move_to'].replace('$bp',basepath).replace('$name',f.split(os.sep)[-1]).replace('$','\\'),f))
+		p("moving file to `"+newgroup+"`")
+		if not options['test']:
 			ensure(newgroup)
 			os.rename(f,newgroup)
-		except:
-			pass
+		# except:
+			# pass
 def ev(match):
-	t = match.group()
-	return str(next(iter((eval(t.replace('$name','"'+f+'"'))))))
+	t = match.group().replace('_','')
+	return str(next(iter((eval(t.replace('$bp',basepath).replace('$name','"'+f.split(os.sep)[-1]+'"'))))))
 def main(options,ids):
-	with open(options['config'],'r') as f:
-		config = toml.loads(f.read())
+	global f
+	try:
+		with open(options['config'],'r') as f:
+			config = toml.loads(f.read())
+	except FileNotFoundError:
+		print("nought: error reading config: `"+options['config']+"` not found")
+		sys.exit(0)
+	except toml.decoder.TomlDecodeError as error:
+		print("nought: error in reading config file `"+options['config']+"`:\n\t"+str(error))
+		sys.exit(0)		
 	if options["verbose"] or options["test"]:
 		global verb
 		verb = True
 	global tab
+	global basepath
 	for group in config["group"]:
 		if "id" not in group:
 			group["id"] = ids
@@ -67,12 +79,14 @@ def main(options,ids):
 		if pa:
 			continue
 		if "base_dir" in config["general"]:
+			p("Going to base directory "+config["general"]["base_dir"])
 			os.chdir(config["general"]["base_dir"])
 		path = group["path"]
 		if isinstance(path,str):
 			path = [path]
-		p("Going to group " + path + ":")
-		for path in group["path"]:
+		p("Going to group with locations " + str(path) + ":")
+		for path in path:
+			basepath = os.path.abspath(path)
 			if "backup" in options:
 				ensure(options["backup"])
 				os.system('cd -r {} {}'.format(path,options["backup"]))
@@ -150,7 +164,7 @@ def main(options,ids):
 								am += 1
 								matches += " `"+include+"`"
 					if "custom" in rule:
-						if eval(rule["custom"].replace('$name','"'+f+'"')):
+						if eval(rule["custom"].replace('$bp',basepath).replace('$name','"'+f.split(os.sep)[-1]+'"')):
 							am += 1
 							matches += " `"+rule['custom']+"`"
 					if "regex" in rule:
@@ -202,20 +216,19 @@ def main(options,ids):
 								os.remove(f)
 						# MOVE
 						elif e(rule["action"]) == "move":
-							if not options['test']:
-								move(rule,f)
+							move(rule,options)
 						# SCRIPT
 						elif "script" in rule:
 							try:
-								p("ruinning script: {}".format(shellquote(rule["script"].replace('$name',newgroup))))
+								p("ruinning script: {}".format(shellquote(rule["script"].replace('$bp',basepath).replace('$name',newgroup.split(os.sep)[-1]))))
 								if not options['test']:
-									os.system(shellquote(rule["script"].replace('$name',newgroup)))
+									os.system(shellquote(rule["script"].replace('$bp',basepath).replace('$name',newgroup.split(os.sep)[-1])))
 							except:
 								pass
 						# LINK
 						if "link_in" in rule:
 							if "regex" in rule:
-								linkloc = re.sub(rule["regex"],e(rule['link_in']).replace('$name',f).replace('$','\\'),f)
+								linkloc = re.sub(rule["regex"],e(rule['link_in']).replace('$bp',basepath).replace('$name',f.split(os.sep)[-1]).replace('$','\\'),f)
 							else:
 								linkloc = e(rule['link_in'])
 							p(f'linking to file from {linkloc}')
@@ -246,15 +259,15 @@ def main(options,ids):
 								pass
 					# MOVE
 					elif e(rule["action"]) == "move":
-						move(rule)
+						move(rule,options)
 					if "script" in rule:
 						try:
-							os.system(shellquote(rule["script"].replace('$name',newgroup)))
+							os.system(shellquote(rule["script"].replace('$bp',basepath).replace('$name',newgroup.split(os.sep)[-1])))
 						except:
 							pass
 					if "link_in" in rule:
 						if "regex" in rule:
-							linkloc = re.sub(rule["regex"],e(rule['link_in']).replace('$name',f).replace('$','\\'),f)
+							linkloc = re.sub(rule["regex"],e(rule['link_in']).replace('$bp',basepath).replace('$name',f.split(os.sep)[-1]).replace('$','\\'),f)
 						else:
 							linkloc = e(rule['link_in'])
 						p(f'linking to file from {linkloc}')
