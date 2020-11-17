@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="nought", # Replace with your own username
-    version="1.0.2",
+    version="1.0.3",
 		# scripts=['bin/nought'],
 		entry_points={
         'console_scripts': ['nought=nought.__main__:main'],
@@ -18,7 +18,7 @@ setuptools.setup(
     url="https://github.com/cole-wilson/nought",
     packages=setuptools.find_packages(),
 		install_requires=[
-   		'toml',
+   		'toml','requests','datetime','os','sys','getopt','re'
 		],
     classifiers=[
         "Programming Language :: Python :: 3",

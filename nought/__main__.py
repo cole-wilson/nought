@@ -85,6 +85,7 @@ def main():
 		options['config'] = os.path.abspath(__file__).replace(__file__,"")+"conf.toml"
 	elif os.name == 'nt':
 		print('You are using Windows, so you have to manually set a config location with -c or --config')
+		sys.exit(1)
 	# print(os.abspath(__file__))
 	elif os.path.isfile('nought.toml'):
 		options['config'] = 'nought.toml'
