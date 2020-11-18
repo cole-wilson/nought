@@ -3,7 +3,7 @@
 [![PyPI - Downloads](https://img.shields.io/pypi/dd/nought?style=flat-square)](https://pypi.org/project/nought/)
 [![PyPI - Versions](https://img.shields.io/pypi/v/nought?style=flat-square)](https://pypi.org/project/nought/)
 ![GitHub - License](https://img.shields.io/github/license/cole-wilson/nought?style=flat-square)
-[![GitHub Repo stars](https://img.shields.io/github/stars/badges/shields?label=Star&style=social)](https://github.com/cole-wilson/nought/stargazers)
+[![GitHub Repo stars](https://img.shields.io/github/stars/cole-wilson/nought?label=Star&style=social)](https://github.com/cole-wilson/nought/stargazers)
 
 `nought` is a super customizable file cleaner/organizer/automator that can help keep you organized.
 It lets you have complete control over all of it's options (there are many)
