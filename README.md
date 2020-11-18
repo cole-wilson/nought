@@ -72,7 +72,7 @@ include_dirs = true # (optional, default="./") Whether to treat directories as f
 	action = "move"
 	move_to = "other"
 ```
-All values in underscore curly braces (_{code here}) are evaluated as python expressions, like this: `./home/${2*90}/test.txt` turns to `./home/180/test.txt`
+All values in underscore curly braces (_{code here}) are evaluated as python expressions, like this: `./home/_{2*90}/test.txt` turns to `./home/180/test.txt`
 $bp is replaced with the starting path or the rule.
 $bd is replaced with the base dir of the entire config file.
 ## Upcoming
