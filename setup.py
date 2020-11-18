@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     name="nought", # Replace with your own username
     version="1.0.5",
-		# scripts=['bin/nought'],
+		scripts=['bin/nought'],
 		entry_points={
         'console_scripts': ['nought=nought.__main__:main'],
     },
@@ -24,4 +24,15 @@ setuptools.setup(
         "Programming Language :: Python :: 3",
     ],
     python_requires='>=3.6',
+		package_data={
+      "": ["*.toml","*.txt"],
+    },
+		license="Apache-2.0",
+		keywords='nought file organizer desktop cleaner declutterer devtools tools tool',
+    project_urls={
+        'Documentation': 'https://github.com/cole-wilson/nought',
+        'Questions': 'https://github.com/cole-wilson/nought',
+        'Source': 'https://github.com/cole-wilson/nought',
+        'Tracker': 'https://github.com/cole-wilson/nought/issues',
+    },
 )

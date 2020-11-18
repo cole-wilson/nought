@@ -57,7 +57,7 @@ def main():
 			try:
 				print('\nConfig file at: {}'.format(os.environ["NOUGHT_CONFIG"]))
 			except KeyError:
-				print('\nConfig file at: NOT DEFINED YET\nto specify a default one, change the `NOUGHT_CONFIG` env variable\nor place your file at '+os.path.dirname(os.path.abspath(__file__))+os.sep+"conf.toml")
+				print('Config file at: NOT DEFINED YET\nto specify a default one, change the `NOUGHT_CONFIG` env variable\nor place your file at `'+os.path.dirname(os.path.abspath(__file__))+os.sep+"conf.toml`")
 			sys.exit()
 
 		if key in ("--verbose", "-v"):
