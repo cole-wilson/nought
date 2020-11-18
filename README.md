@@ -1,6 +1,8 @@
 <h1 align="center">nought <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fcole-wilson%2Fnought&text=Automate%20your%20folder%20organization%20with%20nought%2C%20the%20super%20customizable%20desktop%20organizer.&hashtags=opensource%2Cgithub%2Cpython%2Corganizer"><img alt="Share the word!" src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social"></a></h1>
+
 `nought` is a super customizable file cleaner/organizer/automator that can help keep you organized.
 It lets you have complete control over all of it's options (there are many)
+
 ## Installation
 > **Note:** Please ensure that you have Python 3.6+ and `pip` installed on your computer before completing the following steps:
 
