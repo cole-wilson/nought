@@ -1,5 +1,8 @@
 <h1 align="center">nought <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fcole-wilson%2Fnought&text=Automate%20your%20folder%20organization%20with%20nought%2C%20the%20super%20customizable%20desktop%20organizer.&hashtags=opensource%2Cgithub%2Cpython%2Corganizer"><img alt="Share the word!" src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social"></a></h1>
-
+[![PyPI - Downloads](https://img.shields.io/pypi/dd/nought?style=flat-square)](https://pypi.org/project/nought/)
+[![PyPI - Versions](https://img.shields.io/pypi/v/nought?style=flat-square)](https://pypi.org/project/nought/)
+![GitHub - License](https://img.shields.io/github/license/cole-wilson/nought?style=flat-square)
+[![GitHub Repo stars](https://img.shields.io/github/stars/badges/shields?label=Star&style=social)](https://github.com/cole-wilson/nought/stargazers)
 `nought` is a super customizable file cleaner/organizer/automator that can help keep you organized.
 It lets you have complete control over all of it's options (there are many)
 
