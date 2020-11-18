@@ -55,9 +55,9 @@ def main():
 		
 		if key in ("--about", "-a"):
 			try:
-				print('v.0.0.1\nConfig file at: {}'.format(os.environ["NOUGHT_CONFIG"]))
+				print('\nConfig file at: {}'.format(os.environ["NOUGHT_CONFIG"]))
 			except KeyError:
-				print('v.0.0.1\nConfig file at: NOT DEFINED YET')
+				print('\nConfig file at: NOT DEFINED YET\nto specify a default one, change the `NOUGHT_CONFIG` env variable\nor place your file at '+os.path.dirname(os.path.abspath(__file__))+os.sep+"conf.toml")
 			sys.exit()
 
 		if key in ("--verbose", "-v"):
@@ -84,7 +84,7 @@ def main():
 	elif os.path.isfile(os.path.abspath(__file__).replace(__file__,"")+"conf.toml"):
 		options['config'] = os.path.abspath(__file__).replace(__file__,"")+"conf.toml"
 	elif os.name == 'nt':
-		print('You are using Windows, so you have to manually set a config location with -c or --config')
+		print('You are using Windows, so you have to manually set a config location with -c or --config or place your file at: '+os.path.dirname(os.path.abspath(__file__))+os.sep+"conf.toml")
 		sys.exit(1)
 	# print(os.abspath(__file__))
 	elif os.path.isfile('nought.toml'):
@@ -96,6 +96,7 @@ def main():
 	if "def" in options and options['def']:
 		print('To set a default path to config, please change the NOUGHT_CONFIG env variable like so:')
 		print('\n\texport NOUGHT_CONFIG={}'.format(options['config']))
+		print('\nor place your file at \n\t'+os.path.dirname(os.path.abspath(__file__))+os.sep+"conf.toml")
 		sys.exit(0)
 	if "verbose" in options and options["verbose"]:
 		print("using configuration file: "+options['config'])
