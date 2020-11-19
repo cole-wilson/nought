@@ -32,7 +32,7 @@ def ensure(path):
 def move(rule,options):
 	global f
 	if not "regex" in rule:#NORMAL MOVE
-		newgroup = e(rule["move_to"].replace('$bp',basepath))+os.sep+f
+		newgroup = e(rule["move_to"].replace('$bp',basepath).replace('$name',f.split(os.sep)[-1]))
 		ensure(newgroup)
 		if not options['test']:
 			p("moving file to `"+newgroup+"`")
@@ -72,7 +72,7 @@ def main(options,ids):
 		if isinstance(group["id"],str):
 			group["id"] = [group["id"]]
 		pa = True
-		print('IDs: '+str(ids))
+		# print('IDs: '+str(ids))
 		for x in group["id"]:
 			if x in ids:
 				pa = False
@@ -200,9 +200,12 @@ def main(options,ids):
 							matches += " owned_by_group `"+str(rule["group"])+"`"
 							am += 1
 					if "content_includes" in rule:
-						if e(rule["content_includes"]) in open(f).read():
-							matches += " content_includes:`"+str(rule["content_includes"])+"`"
-							am += 1
+						try:
+							if e(rule["content_includes"]) in open(f).read():
+								matches += " content_includes:`"+str(rule["content_includes"])+"`"
+								am += 1
+						except:
+							pass
 					if am == a:
 						match = True
 						nomatch = False
