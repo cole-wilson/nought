@@ -1,11 +1,11 @@
-import setuptools
+import setuptools, os
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="nought", # Replace with your own username
-    version="1.0.8",
+    version=os.getenv("VERSION"),
 		scripts=['bin/nought','bin/nt'],
 		entry_points={
         'console_scripts': ['nought=nought.__main__:main'],

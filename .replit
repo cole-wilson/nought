@@ -1,4 +1,4 @@
 language="python3"
 #run="python3 setup.py develop;clear;nought"
 #
-run="rm -rf dist;python3 setup.py sdist bdist_wheel py2app;"
+run="rm -rf dist;python3 setup.py sdist bdist_wheel;python3 py2app.py py2app"
