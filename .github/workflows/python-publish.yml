@@ -32,9 +32,10 @@ jobs:
 #         twine upload dist/*
     - name: Pyinstaller
       run: |
-        pyinstaller nought/__main__.py -o
+        pyinstaller nought/__main__.py --onefile
     - name: Commit files
       run: |
+        rm -rf build
         git add * -f
         git config --local user.email "bot@colewilson.xyz"
         git config --local user.name "Mac [bot]"
