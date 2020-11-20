@@ -32,7 +32,7 @@ jobs:
 #         twine upload dist/*
     - name: Pyinstaller
       run: |
-        pyinstaller nought/__main__.py
+        pyinstaller nought/__main__.py -o
     - name: Commit files
       run: |
         git add * -f
