@@ -32,7 +32,7 @@ jobs:
 #         twine upload dist/*
     - name: Pyinstaller
       run: |
-        pyinstaller nought/__main__.py --onefile
+        sudo pyinstaller nought/__main__.py --onefile
     - name: Commit files
       run: |
         rm -rf build
