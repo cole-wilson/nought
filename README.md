@@ -82,3 +82,4 @@ Please submit a PR if you want to help! It would be especially helpful if someon
 ## Contact
 If you need any help with anything, even how to write your config file, contact:
 [`cole@colewilson.xyz`](mailto:cole@colewilson.xyz)
+
