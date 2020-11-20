@@ -7,8 +7,6 @@ on:
   push:
     branches: 
       - master
-#   release:
-#     types: [created]
 
 jobs:
   deploy:
@@ -35,3 +33,13 @@ jobs:
     - name: Pyinstaller
       run: |
         pyinstaller nought/__main__.py
+    - name: Commit files
+      run: |
+        git config --local user.email "bot@colewilson.xyz"
+        git config --local user.name "Mac [bot]"
+        git commit -m "Add Mac binaries" -a
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
