@@ -1,0 +1,20 @@
+name: "lint"
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    - cron: '27 16 * * 3'
+
+jobs:
+  analyze:
+    name: l
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Python Style Checker
+      uses: andymckay/pycodestyle-action@0.1.3
